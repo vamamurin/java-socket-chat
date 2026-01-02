@@ -1,0 +1,35 @@
+src/main/java/com/example/chat_client
+├── ChatClientApplication.java      // (Main) Điểm khởi chạy app
+│
+├── api                             // (Data Layer) Chỉ lo việc gọi HTTP
+│   ├── AuthClient.java             // Gọi /auth/login, /auth/register
+│   └── MessageClient.java          // Gọi /messages
+│
+├── controller                      // (Controller Layer) Cầu nối giữa UI và Service
+│   └── ClientController.java       // UI gọi thằng này, thằng này gọi Service
+│
+├── core                            // (Infrastructure) Cấu hình cốt lõi
+│   ├── BaseClient.java             // Cấu hình HttpClient, ObjectMapper chung
+│   └── UserSession.java            // (Singleton) Két sắt lưu Token & Username
+│
+├── dto                             // (Transfer Data) Dữ liệu thô y hệt Server
+│   ├── request
+│   │   ├── AuthRequest.java        // Có password (dùng login)
+│   │   ├── MessageRequest.java     // Gửi tin
+│   │   └── UserRequest.java        // Object user lồng trong message
+│   └── response
+│       ├── MessageResponse.java    // Hứng tin nhắn từ server
+│       └── UserResponse.java       // Hứng user info
+│
+├── model                           // (Domain Model) Dữ liệu đã xử lý đẹp cho UI
+│   ├── ChatMessage.java            // Model để vẽ lên màn hình TUI
+│   └── User.java                   // Model user hiển thị
+│
+├── service                         // (Business Layer) Xử lý logic, chuyển đổi DTO <-> Model
+│   ├── AuthService.java            // Login xong thì lưu Token vào Session
+│   └── ChatService.java            // Lấy DTO về, convert sang Model trả cho UI
+│
+└── ui                              // (Presentation Layer) Giao diện người dùng
+    ├── ChatTUI.java                // Màn hình chat chính (Lanterna)
+    └── screens
+        └── LoginScreen.java        // Màn hình đăng nhập (Scanner console)
